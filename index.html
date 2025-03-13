@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layout with Flexbox</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .logo img {
+            width: 80px;
+            height: 80px;
+        }
+
+        .container {
+            display: flex;
+            width: 400px;
+            height: 300px;
+            margin: auto;
+            border: 2px solid black;
+        }
+
+        .left {
+            display: flex;
+            flex-direction: column;
+            width: 40%;
+        }
+
+        .box {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid black;
+        }
+
+        .rect {
+            background: lightblue;
+        }
+
+        .square {
+            height: 50%;
+            background: orange;
+        }
+
+        .right {
+            flex: 1;
+            background: lightgreen;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="logo"><img src="logo.png" alt="Logo"></div>
+    <h2>Layout with Flexbox</h2>
+
+    <div class="container">
+        <div class="left">
+            <div class="box rect">..</div>
+            <div class="box square">..</div>
+        </div>
+        <div class="box right">..</div>
+    </div>
+
+</body>
+</html>
