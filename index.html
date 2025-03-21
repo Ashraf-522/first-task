@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Layout with Flexbox</title>
+    <title>Registration Form</title>
     <style>
         body {
             text-align: center;
@@ -51,21 +51,106 @@
         .right {
             flex: 1;
             background: lightgreen;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 5px;
+        }
+
+        
+        .form-container {
+            width: 90%;
+            text-align: left;
+            font-size: 9px;
+        }
+
+            .form-container h3 {
+                text-align: center;
+                margin-bottom: 5px;
+                font-size: 12px;
+            }
+
+            .form-container label {
+                font-weight: bold;
+                display: block;
+                margin-bottom: 2px;
+            }
+
+            .form-container input, .form-container select, .form-container textarea {
+                width: 100%;
+                padding: 3px;
+                margin-bottom: 2px;
+                font-size: 9px;
+                box-sizing: border-box;
+            }
+
+        .gender-group {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .form-container button {
+            background: blue;
+            color: white;
+            padding: 5px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            font-size: 10px;
+        }
+
+        
+        .inline {
+            display: inline-block;
+            margin-right: 5px;
+            font-size: 9px;
         }
     </style>
 </head>
 <body>
 
     <div class="logo"><img src="logo.png" alt="Logo"></div>
-    <h2>Layout with Flexbox</h2>
+    <h2>Air Index</h2>
 
     <div class="container">
         <div class="left">
-            <div class="box rect">..</div>
-            <div class="box square">..</div>
+            <div class="box rect">Rec</div>
+            <div class="box square">SQ</div>
         </div>
-        <div class="box right">..</div>
+        <div class="box right">
+            <div class="form-container">
+                <h3>Get Registered</h3>
+
+                <label for="username">Username/Email:</label>
+                <input type="text" id="username" name="username" required>
+
+                <label for="id">ID:</label>
+                <input type="text" id="id" name="id" required>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+
+                <label for="confirm-password">Confirm Password:</label>
+                <input type="password" id="confirm-password" name="confirm-password" required>
+
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dob" required>
+
+                <label>Gender:</label>
+                <div class="gender-group">
+                    <input type="radio" id="male" name="gender" value="male" required> <label for="male" class="inline">Male</label>
+                    <input type="radio" id="female" name="gender" value="female"> <label for="female" class="inline">Female</label>
+                </div>
+
+                <label for="message">Additional Info:</label>
+                <textarea id="message" name="message" rows="2"></textarea>
+
+                <button type="submit">Submit</button>
+            </div>
+        </div>
     </div>
 
 </body>
 </html>
+
