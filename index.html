@@ -1,9 +1,9 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration Form</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project lab</title>
     <style>
         body {
             text-align: center;
@@ -19,36 +19,13 @@
 
         .container {
             display: flex;
-            width: 400px;
-            height: 300px;
+            width: 450px;
+            height: 400px;
             margin: auto;
             border: 2px solid black;
         }
 
         .left {
-            display: flex;
-            flex-direction: column;
-            width: 40%;
-        }
-
-        .box {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid black;
-        }
-
-        .rect {
-            background: lightblue;
-        }
-
-        .square {
-            height: 50%;
-            background: orange;
-        }
-
-        .right {
             flex: 1;
             background: lightgreen;
             display: flex;
@@ -58,17 +35,16 @@
             padding: 5px;
         }
 
-        
         .form-container {
             width: 90%;
             text-align: left;
-            font-size: 9px;
+            font-size: 10px;
         }
 
             .form-container h3 {
                 text-align: center;
                 margin-bottom: 5px;
-                font-size: 12px;
+                font-size: 14px;
             }
 
             .form-container label {
@@ -81,7 +57,7 @@
                 width: 100%;
                 padding: 3px;
                 margin-bottom: 2px;
-                font-size: 9px;
+                font-size: 10px;
                 box-sizing: border-box;
             }
 
@@ -97,14 +73,48 @@
             border: none;
             cursor: pointer;
             width: 100%;
-            font-size: 10px;
+            font-size: 12px;
         }
 
-        
         .inline {
             display: inline-block;
             margin-right: 5px;
-            font-size: 9px;
+            font-size: 11px;
+        }
+
+        .right {
+            display: flex;
+            flex-direction: column;
+            width: 40%;
+        }
+
+        .box {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid black;
+            font-size: 12px;
+            padding: 5px;
+            text-align: left;
+        }
+
+        .rect {
+            background: lightblue;
+            flex-direction: column;
+            overflow-y: auto;
+            text-align: left;
+        }
+
+        .square {
+            height: 50%;
+            background: orange;
+        }
+
+        .error {
+            color: black;
+            font-size: 10px;
+            margin-bottom: 2px;
         }
     </style>
 </head>
@@ -114,12 +124,9 @@
     <h2>Air Index</h2>
 
     <div class="container">
-        <div class="left">
-            <div class="box rect">Rec</div>
-            <div class="box square">SQ</div>
-        </div>
-        <div class="box right">
-            <div class="form-container">
+        
+        <div class="box left">
+            <form class="form-container" onsubmit="return validateForm(event)">
                 <h3>Get Registered</h3>
 
                 <label for="username">Username/Email:</label>
@@ -139,18 +146,78 @@
 
                 <label>Gender:</label>
                 <div class="gender-group">
-                    <input type="radio" id="male" name="gender" value="male" required> <label for="male" class="inline">Male</label>
-                    <input type="radio" id="female" name="gender" value="female"> <label for="female" class="inline">Female</label>
+                    <input type="radio" id="male" name="gender" value="male">
+                    <label for="male" class="inline">Male</label>
+                    <input type="radio" id="female" name="gender" value="female">
+                    <label for="female" class="inline">Female</label>
                 </div>
 
                 <label for="message">Additional Info:</label>
                 <textarea id="message" name="message" rows="2"></textarea>
 
                 <button type="submit">Submit</button>
-            </div>
+            </form>
+        </div>
+
+        
+        <div class="right">
+            <div class="box rect" id="error-box"></div>
+            <div class="box square">SQ</div>
         </div>
     </div>
 
+    <script>
+        function validateForm(event) {
+            event.preventDefault(); 
+            const errors = [];
+
+            const username = document.getElementById("username").value.trim();
+            const id = document.getElementById("id").value.trim();
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirm-password").value;
+            const dob = document.getElementById("dob").value;
+            const genderMale = document.getElementById("male").checked;
+            const genderFemale = document.getElementById("female").checked;
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!emailRegex.test(username)) {
+                errors.push("Please enter a valid email address.");
+            }
+
+            if (id === "" || password === "" || confirmPassword === "" || dob === "") {
+                errors.push("Please fill in all required fields.");
+            }
+
+            if (password !== confirmPassword) {
+                errors.push("Passwords do not match.");
+            }
+
+            if (!genderMale && !genderFemale) {
+                errors.push("Please select a gender.");
+            }
+
+            const errorBox = document.getElementById("error-box");
+            errorBox.innerHTML = "";
+
+            if (errors.length > 0) {
+                errors.forEach(error => {
+                    const p = document.createElement("p");
+                    p.className = "error";
+                    p.textContent = "⚠ " + error;
+                    errorBox.appendChild(p);
+                });
+                return false;
+            } else {
+                const successMsg = document.createElement("p");
+                successMsg.className = "error";
+                successMsg.style.color = "green";
+                successMsg.textContent = "✅ Registration successful!";
+                errorBox.appendChild(successMsg);
+                return true;
+            }
+        }
+    </script>
+
 </body>
 </html>
-
